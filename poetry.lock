@@ -27,6 +27,16 @@ pytz = "*"
 "zope.interface" = "*"
 
 [[package]]
+name = "logging"
+version = "0.4.9.6"
+description = "A logging module for Python"
+optional = false
+python-versions = "*"
+files = [
+    {file = "logging-0.4.9.6.tar.gz", hash = "sha256:26f6b50773f085042d301085bd1bf5d9f3735704db9f37c1ce6d8b85c38f2417"},
+]
+
+[[package]]
 name = "pytz"
 version = "2023.3.post1"
 description = "World timezone definitions, modern and historical"
@@ -109,4 +119,4 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "e7aafd889fa17c5855d59f4a43200c9587b269566a6e1951482a4e5653b9c5bf"
+content-hash = "e6fa2d59f3bbbef6e1ce26e538f0d398571b9c842d502b4600f5ec9f4739b4dd"

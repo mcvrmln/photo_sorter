@@ -11,6 +11,10 @@ import argparse
 import os
 import datetime
 import shutil
+import logging
+
+#Setting up logging
+logging.basicConfig(filename=f'./logs/log_{datetime.datetime.now().strftime("%Y-%m-%dT%H-%M-%S")}.log', level=logging.INFO, format='%(asctime)s %(message)s')
 
 
 def get_creation_datetime(file_name: str) -> datetime:
@@ -46,6 +50,7 @@ def get_file_type(file_name: str) -> str:
 def get_filelist(dir:str) -> list:
     """
     Returns a list of all files
+
     """
 
     file_list = []
@@ -61,7 +66,9 @@ def get_filelist(dir:str) -> list:
 def make_folder(path):
     """
     Make the folder structure, if it not exists
+
     """
+
     if not os.path.isdir(path):
         os.makedirs(path)
 
@@ -69,13 +76,14 @@ def make_folder(path):
 def copy_file(file, destination, file_name):
     """
     copies the file to the destination.
+
     """
 
     target = os.path.join(destination, file_name)
     if not os.path.exists(target):
         shutil.copy2(file, target)
     else:
-        print(f'File {file} is not copied because it already exists')
+        logging.warning(f'File {file} is not copied because it already exists')
 
 
 def read_arguments():
@@ -83,6 +91,7 @@ def read_arguments():
     Accepts and requires two arguments:
     --in_dir : The folder to read
     --out_dir : The folder where the photos and videos are stored
+
     """
 
     parser = argparse.ArgumentParser()
@@ -95,10 +104,14 @@ def read_arguments():
 def run_app():
     """
     Main function. 
+
     """
     
     # Get CLI arguments
     arguments = read_arguments()
+    logging.info(f'Start sorting and copying files')
+    logging.info(f'Input folder: {arguments.in_dir}')
+    logging.info(f'Output folder: {arguments.out_dir}')
 
     # Check if the folders exist
     if os.path.isdir(arguments.in_dir) and os.path.isdir(arguments.out_dir):
@@ -116,8 +129,8 @@ def run_app():
                 copy_file(file, destination, file_name)
 
     else:
-        print("One or both of the directories is not a folder.")
-
+        logging.error("One or both of the directories is not a folder.")
+    logging.info('Process finished')
 
 if __name__ == '__main__':
     run_app()
