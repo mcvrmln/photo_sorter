@@ -14,7 +14,8 @@ import shutil
 import logging
 
 #Setting up logging
-logging.basicConfig(filename=f'./logs/log_{datetime.datetime.now().strftime("%Y-%m-%dT%H-%M-%S")}.log', level=logging.INFO, format='%(asctime)s %(message)s')
+logging.basicConfig(filename=f'./logs/log_{datetime.datetime.now().strftime("%Y-%m-%dT%H-%M-%S")}.log', 
+                    level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
 def get_creation_datetime(file_name: str) -> datetime:
@@ -71,6 +72,7 @@ def make_folder(path):
 
     if not os.path.isdir(path):
         os.makedirs(path)
+        logging.info(f'Made path: {path}')
 
 
 def copy_file(file, destination, file_name):
